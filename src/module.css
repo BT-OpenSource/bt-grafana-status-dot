@@ -1,0 +1,13 @@
+.dot {
+  display: inline-block;
+}
+
+.dot-circle {
+  margin: 5px;
+  border-radius: 100%;
+}
+
+.dot-tooltip {
+  width: 0;
+  position: absolute;
+}

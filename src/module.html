@@ -1,0 +1,8 @@
+<div>
+  <div class="dot" ng-repeat="dot in ctrl.dots" ng-mouseenter="dot.hover=true" ng-mouseleave="dot.hover=false">
+    <div class="dot-circle" ng-style="ctrl.styleFor(dot)"/>
+    <div class="dot-tooltip" ng-show="dot.hover" style="white-space:nowrap">
+      {{ dot.name }} <br> {{ctrl.format(dot.latestValue)}} ({{ctrl.format(dot.percentChange, 'percent')}})
+    </div>
+  </div>
+</div>

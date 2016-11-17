@@ -1,0 +1,31 @@
+{
+  "type": "panel",
+  "name": "Trend Dot",
+  "id": "btplc-trend-dot-panel",
+
+  "info": {
+    "version": "0.0.1",
+    "description": "Dot panel showing trends within series",
+    "author": {
+      "name": "BT Plc",
+      "url": "https://bt.com"
+    },
+    "keywords": ["trend", "dot", "panel"],
+    "links": [
+      {"name": "MIT Licence", "url": "https://github.com/BTplc/grafana-plugins/blob/master/LICENSE"},
+      {"name": "Project Site", "url": "https://github.com/BTplc/grafana-plugins"}
+    ],
+    "screenshots": [
+      {"name": "Trend Dot", "path": "src/img/trend_dot.png"},
+      {"name": "Trend Dot Options", "path": "src/img/trend_dot_options.png"}
+    ],
+    "logos": {
+      "small": "img/logo.jpg"
+    }
+  },
+
+  "dependencies": {
+    "grafanaVersion": "3.x.x",
+    "plugins": [ ]
+  }
+}
