@@ -16,8 +16,8 @@
       {"name": "Project Site", "url": "https://github.com/BTplc/grafana-plugins"}
     ],
     "screenshots": [
-      {"name": "Trend Dot", "path": "src/img/trend_dot.png"},
-      {"name": "Trend Dot Options", "path": "src/img/trend_dot_options.png"}
+      {"name": "Trend Dot", "path": "img/trend_dot.png"},
+      {"name": "Trend Dot Options", "path": "img/trend_dot_options.png"}
     ],
     "logos": {
       "small": "img/logo.jpg"

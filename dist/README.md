@@ -20,13 +20,16 @@ This panel should work with the following data sources: [Graphite](https://grafa
 
 Now do this...
 
-    # Install development plugins
+    # Install development packages
     npm install
+
+    # Install the grunt-cli
+    sudo npm install -g grunt-cli
 
     # Compile into dist/
     grunt
 
-    # Restart Grafana to see my_plugin
+    # Restart Grafana to see it
     docker restart grafana.docker
 
     # Watch for changes (requires refresh)

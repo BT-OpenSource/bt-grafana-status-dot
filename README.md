@@ -23,6 +23,9 @@ Now do this...
     # Install development packages
     npm install
 
+    # Install the grunt-cli
+    sudo npm install -g grunt-cli
+
     # Compile into dist/
     grunt
 
