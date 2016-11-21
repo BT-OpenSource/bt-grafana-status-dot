@@ -12,15 +12,16 @@
     },
     "keywords": ["trend", "dot", "panel"],
     "links": [
-      {"name": "MIT Licence", "url": "https://github.com/BTplc/grafana-plugins/blob/master/LICENSE"},
-      {"name": "Project Site", "url": "https://github.com/BTplc/grafana-plugins"}
+      {"name": "MIT Licence", "url": "https://github.com/BTplc/grafana-trend-dot/blob/master/LICENSE"},
+      {"name": "Project Site", "url": "https://github.com/BTplc/grafana-trend-dot"}
     ],
     "screenshots": [
       {"name": "Trend Dot", "path": "img/trend_dot.png"},
       {"name": "Trend Dot Options", "path": "img/trend_dot_options.png"}
     ],
     "logos": {
-      "small": "img/logo.jpg"
+      "small": "img/logo.jpg",
+      "large": "img/logo.jpg"
     }
   },
 
