@@ -24,6 +24,12 @@
 <div class="col-md-6">
   <div class="editor-row">
     <div class="section gf-form-group">
+      <div class="gf-form">
+        <label class="gf-form-label width-9">Default Color</label>
+        <label class="gf-form-label">
+          <spectrum-picker ng-model="ctrl.panel.defaultColor" ng-change="ctrl.render()" ng-model-onblur="true"/>
+        </label>
+      </div>
       <div class="gf-form" ng-repeat="threshold in ctrl.panel.thresholds">
         <label class="gf-form-label width-9">Threshold {{$index + 1}}</label>
         <input type="text" class="input-small gf-form-input width-9" ng-model="threshold.value" ng-change="ctrl.render()" ng-model-onblur=true />
