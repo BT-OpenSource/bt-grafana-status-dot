@@ -4,7 +4,7 @@
   "id": "btplc-trend-dot-panel",
 
   "info": {
-    "version": "0.0.2",
+    "version": "0.0.3",
     "description": "Dot panel showing trends within series",
     "author": {
       "name": "BT Plc",
