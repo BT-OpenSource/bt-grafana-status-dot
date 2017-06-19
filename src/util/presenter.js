@@ -6,22 +6,12 @@ export class Presenter {
   }
 
   call (dots) {
-    dots.forEach(dot => this._render(dot))
+    dots.forEach(dot => (dot.color = this._colorFor(dot.colorValue)))
   }
 
-  _render (dot) {
-    dot.percentChange = this._percentChangeFor(dot)
-    dot.color = this._colorFor(dot.percentChange)
-  }
-
-  _colorFor (percentChange) {
+  _colorFor (value) {
     var thresholds = this.options.thresholds.concat().sort((a, b) => b.value - a.value)
-    var threshold = _.find(thresholds, (threshold) => percentChange >= threshold.value)
+    var threshold = _.find(thresholds, (threshold) => value >= threshold.value)
     return threshold ? threshold.color : this.options.defaultColor
-  }
-
-  _percentChangeFor (dot) {
-    var change = dot.latestValue - dot.oldestValue
-    return (change / dot.oldestValue) * 100
   }
 }

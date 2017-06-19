@@ -1,9 +1,9 @@
 'use strict';
 
-System.register(['lodash'], function (_export, _context) {
+System.register(['../external/math.min'], function (_export, _context) {
   "use strict";
 
-  var _, _createClass, Builder;
+  var math, _createClass, Builder;
 
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
@@ -12,8 +12,8 @@ System.register(['lodash'], function (_export, _context) {
   }
 
   return {
-    setters: [function (_lodash) {
-      _ = _lodash.default;
+    setters: [function (_externalMathMin) {
+      math = _externalMathMin;
     }],
     execute: function () {
       _createClass = function () {
@@ -44,41 +44,32 @@ System.register(['lodash'], function (_export, _context) {
         _createClass(Builder, [{
           key: 'call',
           value: function call() {
-            var _this = this;
-
             var seriesList = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
 
-            return seriesList.map(function (series) {
-              return _this._buildDotFor(series);
-            });
+            return seriesList.map(this._eval, this);
           }
         }, {
-          key: '_buildDotFor',
-          value: function _buildDotFor(series) {
-            var points = this._cleanup(series);
+          key: '_eval',
+          value: function _eval(series) {
+            var scratchPadExp = this.options.mathScratchPad;
+            var displayValueExp = this.options.mathDisplayValue;
+            var colorValueExp = this.options.mathColorValue;
+            var scope = { data: this._toValues(series) };
 
             return { name: series.target,
-              oldestValue: this._oldestValueFor(points),
-              latestValue: this._latestValueFor(points) };
+              scratchPad: math.eval(scratchPadExp, scope),
+              displayValue: math.eval(displayValueExp, scope),
+              colorValue: math.eval(colorValueExp, scope) };
           }
         }, {
-          key: '_cleanup',
-          value: function _cleanup(series) {
-            return _.filter(series.datapoints, function (point) {
-              return point[0] != null;
+          key: '_toValues',
+          value: function _toValues(series) {
+            var points = series.datapoints.map(function (point) {
+              return point[0];
             });
-          }
-        }, {
-          key: '_oldestValueFor',
-          value: function _oldestValueFor(points) {
-            var point = points[0];
-            return point ? point[0] : null;
-          }
-        }, {
-          key: '_latestValueFor',
-          value: function _latestValueFor(points) {
-            var point = points[points.length - 1];
-            return point ? point[0] : null;
+            return points.filter(function (value) {
+              return value != null;
+            });
           }
         }]);
 

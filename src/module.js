@@ -10,10 +10,13 @@ const panelDefaults = {
   defaultColor: 'rgb(117, 117, 117)',
   thresholds: [],
   format: 'none',
-  decimals: 2
+  decimals: 2,
+  mathScratchPad: 'data = size(data)[1] == 0 ? [NaN] : data',
+  mathDisplayValue: 'data[end]',
+  mathColorValue: 'data[end]'
 }
 
-export class TrendDotCtrl extends MetricsPanelCtrl {
+export class StatusDotCtrl extends MetricsPanelCtrl {
   constructor ($scope, $injector) {
     super($scope, $injector)
     _.defaults(this.panel, panelDefaults)
@@ -27,7 +30,8 @@ export class TrendDotCtrl extends MetricsPanelCtrl {
   }
 
   onInitEditMode () {
-    this.addEditorTab('Options', 'public/plugins/btplc-trend-dot-panel/editor.html')
+    this.addEditorTab('Options', 'public/plugins/btplc-status-dot-panel/editor.html')
+    this.addEditorTab('Values', 'public/plugins/btplc-status-dot-panel/values.html')
     this.unitFormats = kbn.getUnitFormats()
   }
 
@@ -60,11 +64,11 @@ export class TrendDotCtrl extends MetricsPanelCtrl {
     return { 'background': dot.color, 'width': this.panel.radius, 'height': this.panel.radius }
   }
 
-  format (value, format = this.panel.format) {
-    var formatFunc = kbn.valueFormats[format]
+  format (value) {
+    var formatFunc = kbn.valueFormats[this.panel.format]
     return formatFunc(value, this.panel.decimals, null)
   }
 }
 
-TrendDotCtrl.templateUrl = 'module.html'
-export { TrendDotCtrl as PanelCtrl }
+StatusDotCtrl.templateUrl = 'module.html'
+export { StatusDotCtrl as PanelCtrl }

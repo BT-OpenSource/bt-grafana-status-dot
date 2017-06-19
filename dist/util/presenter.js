@@ -47,31 +47,19 @@ System.register(['lodash'], function (_export, _context) {
             var _this = this;
 
             dots.forEach(function (dot) {
-              return _this._render(dot);
+              return dot.color = _this._colorFor(dot.colorValue);
             });
           }
         }, {
-          key: '_render',
-          value: function _render(dot) {
-            dot.percentChange = this._percentChangeFor(dot);
-            dot.color = this._colorFor(dot.percentChange);
-          }
-        }, {
           key: '_colorFor',
-          value: function _colorFor(percentChange) {
+          value: function _colorFor(value) {
             var thresholds = this.options.thresholds.concat().sort(function (a, b) {
               return b.value - a.value;
             });
             var threshold = _.find(thresholds, function (threshold) {
-              return percentChange >= threshold.value;
+              return value >= threshold.value;
             });
             return threshold ? threshold.color : this.options.defaultColor;
-          }
-        }, {
-          key: '_percentChangeFor',
-          value: function _percentChangeFor(dot) {
-            var change = dot.latestValue - dot.oldestValue;
-            return change / dot.oldestValue * 100;
           }
         }]);
 

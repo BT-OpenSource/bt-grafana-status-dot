@@ -1,12 +1,18 @@
-# Grafana Trend Dot
+# Grafana Status Dot
 
-A trend dot panel for [Grafana](http://grafana.org/).
+A status dot panel for [Grafana](http://grafana.org/).
 
-![Trend Dot Panel](https://raw.githubusercontent.com/BTplc/grafana-trend-dot/master/src/img/trend_dot.png)
+![Status Dot Panel](https://raw.githubusercontent.com/BTplc/grafana-status-dot/master/src/img/status_dot.png)
 
-## Overview
+This panel shows a colored dot for each series. This is is useful if you want to monitor the latest value of many series at once. Options for this panel include variable radius, precision and units (for the tooltip) and color thresholds for the value.
 
-This panel shows a dot for each series, where each dot is colored based on the percentage change between the first and last values of that series. This is is useful if you want to monitor a collection of values as they change over time. Options for this panel include variable radius, precision and units (for the tooltip) and color thresholds for the percentage change.
+## Customization
+
+A separate tab allows you to customize how the display and color value are calculated for each dot, using [mathjs](http://mathjs.org).
+
+![Status Dot Values](https://raw.githubusercontent.com/BTplc/grafana-status-dot/master/src/img/status_box_value.png)
+
+The initial scope includes a `data` array, which is set to the compacted (no nulls) values of the series of each dot.
 
 ## Compatibility
 
@@ -16,7 +22,7 @@ This panel should work with the following data sources: [Graphite](https://grafa
 
 [Docker](https://www.docker.com/) is an easy way to spin-up an instance of Grafana. With docker installed, run the following command in the directory containing the plugin; this will expose the local plugin on your machine to the Grafana container so you can test it out.
 
-    docker run -it -v $PWD:/var/lib/grafana/plugins/trend_dot -p 3000:3000 --name grafana.docker grafana/grafana
+    docker run -it -v $PWD:/var/lib/grafana/plugins/status_dot -p 3000:3000 --name grafana.docker grafana/grafana
 
 Now do this...
 

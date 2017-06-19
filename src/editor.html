@@ -33,7 +33,6 @@
       <div class="gf-form" ng-repeat="threshold in ctrl.panel.thresholds">
         <label class="gf-form-label width-10">Threshold {{$index + 1}}</label>
         <input type="text" class="input-small gf-form-input width-15" ng-model="threshold.value" ng-change="ctrl.render()" ng-model-onblur=true />
-        <label class="gf-form-label width-3">%</label>
         <label class="gf-form-label">
           <spectrum-picker ng-model="threshold.color" ng-change="ctrl.render()" ng-model-onblur="true"/>
         </label>

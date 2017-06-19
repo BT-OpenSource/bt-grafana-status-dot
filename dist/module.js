@@ -3,7 +3,7 @@
 System.register(['./module.css!', 'lodash', 'app/core/utils/kbn', 'app/plugins/sdk', './util/builder', './util/presenter'], function (_export, _context) {
   "use strict";
 
-  var _, kbn, MetricsPanelCtrl, Builder, Presenter, _createClass, panelDefaults, TrendDotCtrl;
+  var _, kbn, MetricsPanelCtrl, Builder, Presenter, _createClass, panelDefaults, StatusDotCtrl;
 
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
@@ -71,16 +71,19 @@ System.register(['./module.css!', 'lodash', 'app/core/utils/kbn', 'app/plugins/s
         defaultColor: 'rgb(117, 117, 117)',
         thresholds: [],
         format: 'none',
-        decimals: 2
+        decimals: 2,
+        mathScratchPad: 'data = size(data)[1] == 0 ? [NaN] : data',
+        mathDisplayValue: 'data[end]',
+        mathColorValue: 'data[end]'
       };
 
-      _export('PanelCtrl', _export('TrendDotCtrl', TrendDotCtrl = function (_MetricsPanelCtrl) {
-        _inherits(TrendDotCtrl, _MetricsPanelCtrl);
+      _export('PanelCtrl', _export('StatusDotCtrl', StatusDotCtrl = function (_MetricsPanelCtrl) {
+        _inherits(StatusDotCtrl, _MetricsPanelCtrl);
 
-        function TrendDotCtrl($scope, $injector) {
-          _classCallCheck(this, TrendDotCtrl);
+        function StatusDotCtrl($scope, $injector) {
+          _classCallCheck(this, StatusDotCtrl);
 
-          var _this = _possibleConstructorReturn(this, (TrendDotCtrl.__proto__ || Object.getPrototypeOf(TrendDotCtrl)).call(this, $scope, $injector));
+          var _this = _possibleConstructorReturn(this, (StatusDotCtrl.__proto__ || Object.getPrototypeOf(StatusDotCtrl)).call(this, $scope, $injector));
 
           _.defaults(_this.panel, panelDefaults);
 
@@ -93,10 +96,11 @@ System.register(['./module.css!', 'lodash', 'app/core/utils/kbn', 'app/plugins/s
           return _this;
         }
 
-        _createClass(TrendDotCtrl, [{
+        _createClass(StatusDotCtrl, [{
           key: 'onInitEditMode',
           value: function onInitEditMode() {
-            this.addEditorTab('Options', 'public/plugins/btplc-trend-dot-panel/editor.html');
+            this.addEditorTab('Options', 'public/plugins/btplc-status-dot-panel/editor.html');
+            this.addEditorTab('Values', 'public/plugins/btplc-status-dot-panel/values.html');
             this.unitFormats = kbn.getUnitFormats();
           }
         }, {
@@ -137,21 +141,19 @@ System.register(['./module.css!', 'lodash', 'app/core/utils/kbn', 'app/plugins/s
         }, {
           key: 'format',
           value: function format(value) {
-            var _format = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : this.panel.format;
-
-            var formatFunc = kbn.valueFormats[_format];
+            var formatFunc = kbn.valueFormats[this.panel.format];
             return formatFunc(value, this.panel.decimals, null);
           }
         }]);
 
-        return TrendDotCtrl;
+        return StatusDotCtrl;
       }(MetricsPanelCtrl)));
 
-      _export('TrendDotCtrl', TrendDotCtrl);
+      _export('StatusDotCtrl', StatusDotCtrl);
 
-      TrendDotCtrl.templateUrl = 'module.html';
+      StatusDotCtrl.templateUrl = 'module.html';
 
-      _export('PanelCtrl', TrendDotCtrl);
+      _export('PanelCtrl', StatusDotCtrl);
     }
   };
 });

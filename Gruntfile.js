@@ -38,7 +38,7 @@ module.exports = function(grunt) {
         files: [{
           cwd: 'src',
           expand: true,
-          src: ['**/*.js'],
+          src: ['*.js', 'util/*.js'],
           dest: 'dist',
           ext:'.js'
         }]
@@ -46,7 +46,7 @@ module.exports = function(grunt) {
     },
 
     eslint: {
-      target: ['src', 'spec']
+      target: ['src/*.js', 'src/util/*.js', 'spec']
     },
 
     execute: {

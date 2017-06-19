@@ -1,4 +1,4 @@
-import _ from 'lodash'
+import * as math from '../external/math.min'
 
 export class Builder {
   constructor (options) {
@@ -6,28 +6,23 @@ export class Builder {
   }
 
   call (seriesList = []) {
-    return seriesList.map(series => this._buildDotFor(series))
+    return seriesList.map(this._eval, this)
   }
 
-  _buildDotFor (series) {
-    var points = this._cleanup(series)
+  _eval (series) {
+    var scratchPadExp = this.options.mathScratchPad
+    var displayValueExp = this.options.mathDisplayValue
+    var colorValueExp = this.options.mathColorValue
+    var scope = { data: this._toValues(series) }
 
     return { name: series.target,
-      oldestValue: this._oldestValueFor(points),
-      latestValue: this._latestValueFor(points) }
+      scratchPad: math.eval(scratchPadExp, scope),
+      displayValue: math.eval(displayValueExp, scope),
+      colorValue: math.eval(colorValueExp, scope) }
   }
 
-  _cleanup (series) {
-    return _.filter(series.datapoints, (point) => point[0] != null)
-  }
-
-  _oldestValueFor (points) {
-    var point = points[0]
-    return point ? point[0] : null
-  }
-
-  _latestValueFor (points) {
-    var point = points[points.length - 1]
-    return point ? point[0] : null
+  _toValues (series) {
+    var points = series.datapoints.map(point => point[0])
+    return points.filter(value => value != null)
   }
 }

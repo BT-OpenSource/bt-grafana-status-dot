@@ -1,23 +1,23 @@
 {
   "type": "panel",
-  "name": "Trend Dot",
-  "id": "btplc-trend-dot-panel",
+  "name": "Status Dot",
+  "id": "btplc-status-dot-panel",
 
   "info": {
-    "version": "0.0.3",
-    "description": "Dot panel showing trends within series",
+    "version": "0.0.1",
+    "description": "Dot panel showing status across series",
     "author": {
       "name": "BT Plc",
       "url": "https://bt.com"
     },
-    "keywords": ["trend", "dot", "panel"],
+    "keywords": ["status", "dot", "panel"],
     "links": [
-      {"name": "MIT Licence", "url": "https://github.com/BTplc/grafana-trend-dot/blob/master/LICENSE"},
-      {"name": "Project Site", "url": "https://github.com/BTplc/grafana-trend-dot"}
+      {"name": "MIT Licence", "url": "https://github.com/BTplc/grafana-status-dot/blob/master/LICENSE"},
+      {"name": "Project Site", "url": "https://github.com/BTplc/grafana-status-dot"}
     ],
     "screenshots": [
-      {"name": "Trend Dot", "path": "img/trend_dot.png"},
-      {"name": "Trend Dot Options", "path": "img/trend_dot_options.png"}
+      {"name": "Status Dot", "path": "img/status_dot.png"},
+      {"name": "Status Dot Options", "path": "img/status_dot_options.png"}
     ],
     "logos": {
       "small": "img/logo.jpg",
