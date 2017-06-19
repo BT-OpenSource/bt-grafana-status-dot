@@ -17,7 +17,8 @@
     ],
     "screenshots": [
       {"name": "Status Dot", "path": "img/status_dot.png"},
-      {"name": "Status Dot Options", "path": "img/status_dot_options.png"}
+      {"name": "Status Dot Options", "path": "img/status_dot_options.png"},
+      {"name": "Status Dot Values", "path": "img/status_dot_values.png"}
     ],
     "logos": {
       "small": "img/logo.jpg",
