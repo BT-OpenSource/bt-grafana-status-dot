@@ -1,36 +1,43 @@
-<div class="col-md-5">
-  <h5 class="section-heading">
-    <span>Scratch Pad</span>
-    <a style="font-size: 12px" target="_blank" href="http://mathjs.org">
-      (uses mathjs)
-    </a>
-  </h5>
-  <div class="gf-form">
-    <textarea class="gf-form-input" rows="7"
-      ng-change="ctrl.render()" ng-model="ctrl.panel.mathScratchPad"/>
-  </div>
+<div class="editor-row">
+	<div class="section gf-form-group">
+		<h5 class="section-heading">
+			<span>Scratch Pad</span>
+			<a style="font-size: 12px" target="_blank" href="http://mathjs.org">
+				(uses mathjs)
+			</a>
+		</h5>
+
+		<div class="gf-form">
+			<textarea class="gf-form-input width-30" rows="7"
+				ng-change="ctrl.render()" ng-model="ctrl.panel.mathScratchPad"/>
+		</div>
+	</div>
+
+	<div class="section gf-form-group">
+    <h5 class="section-heading">Values</h5>
+		<div class="gf-form">
+			<label class="gf-form-label width-10">Display Value</label>
+			<input class="gf-form-input width-15"
+				ng-change="ctrl.render()" ng-model="ctrl.panel.mathDisplayValue"/>
+		</div>
+
+		<div class="gf-form">
+			<label class="gf-form-label width-10">Color Value</label>
+			<input class="gf-form-input width-15"
+				ng-change="ctrl.render()" ng-model="ctrl.panel.mathColorValue"/>
+		</div>
+	</div>
 </div>
 
-<div class="col-md-4">
-  <h5 class="section-heading">
-    <span>Debugger</span>
-    <span style="font-size: 12px">(first series)</span>
-  </h5>
-  <label>
-    {{ ctrl.dots[0].scratchPad | json }}
-  </label>
-</div>
+<div class="editor-row">
+	<div class="section gf-form-group">
+		<h5 class="section-heading">
+			<span>Debugger</span>
+			<span style="font-size: 12px">(first series)</span>
+		</h5>
 
-<div class="col-md-3">
-  <div class="gf-form">
-    <label class="gf-form-label width-10">Display Value</label>
-    <input class="gf-form-input width-15"
-      ng-change="ctrl.render()" ng-model="ctrl.panel.mathDisplayValue"/>
-  </div>
-
-  <div class="gf-form">
-    <label class="gf-form-label width-10">Color Value</label>
-    <input class="gf-form-input width-15"
-      ng-change="ctrl.render()" ng-model="ctrl.panel.mathColorValue"/>
-  </div>
+		<div class="gf-form">
+			{{ ctrl.dots[0].scratchPad | json }}
+	  </div>
+	</div>
 </div>

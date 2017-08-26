@@ -1,6 +1,9 @@
 <div>
   <div class="dot" ng-repeat="dot in ctrl.dots" ng-mouseenter="dot.hover=true" ng-mouseleave="dot.hover=false">
-    <div class="dot-circle" ng-style="ctrl.styleFor(dot)"/>
+		<a ng-href="{{dot.link.href}}" target="{{dot.link.target}}">
+			<div class="dot-circle" ng-style="ctrl.styleFor(dot)"/>
+		</a>
+
     <div class="dot-tooltip" ng-show="dot.hover" style="white-space:nowrap">
       {{ dot.name }} <br> {{ ctrl.format(dot.displayValue) }}
     </div>
