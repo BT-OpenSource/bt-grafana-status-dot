@@ -64,13 +64,15 @@ System.register([], function (_export, _context) {
         }, {
           key: '_evaluateLink',
           value: function _evaluateLink(dot) {
+            var _linkSrv;
+
             var links = this.panel.links || [];
             var linkInfo = links[this.panel.linkIndex];
 
             if (linkInfo === undefined) return;
 
-            var linkFn = this.linkSrv.getPanelLinkAnchorInfo;
-            dot.link = linkFn(linkInfo, dot.linkScope);
+            var args = [linkInfo, dot.linkScope];
+            dot.link = (_linkSrv = this.linkSrv).getPanelLinkAnchorInfo.apply(_linkSrv, args);
           }
         }]);
 

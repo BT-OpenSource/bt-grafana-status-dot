@@ -28,7 +28,7 @@ export class Linker {
 
     if (linkInfo === undefined) return
 
-    var linkFn = this.linkSrv.getPanelLinkAnchorInfo
-    dot.link = linkFn(linkInfo, dot.linkScope)
+    var args = [linkInfo, dot.linkScope]
+    dot.link = this.linkSrv.getPanelLinkAnchorInfo(...args)
   }
 }

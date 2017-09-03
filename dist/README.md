@@ -14,6 +14,14 @@ A separate tab allows you to customize how the display and color value are calcu
 
 The initial scope includes a `data` array, which is set to the compacted (no nulls) values of the series for each dot.
 
+## Links
+
+A further tab allows you to specify the link for each dot using variables derived from the name of its series.
+
+![Status Dot Links](https://raw.githubusercontent.com/BTplc/grafana-status-dot/master/src/img/status_dot_links.png)
+
+The variables are set by splitting the series name on each dot and selecting the value at the specified index.
+
 ## Compatibility
 
 This panel should work with the following data sources: [Graphite](https://grafana.net/plugins/graphite)

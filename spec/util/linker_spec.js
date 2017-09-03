@@ -2,14 +2,13 @@ import {Linker} from '../../src/util/linker'
 
 describe('Linker', function () {
   beforeEach(function () {
-    this.dot = { name: 'val0.val1.val2' }
-    this.linkSrv = { getPanelLinkAnchorInfo: function () { } }
-
     this.panel = {
       linkVars: [{ name: 'var1', index: '1' }],
       scopedVars: { 'var0': { value: 'val0' } }
     }
 
+    this.dot = { name: 'val0.val1.val2' }
+    this.linkSrv = { getPanelLinkAnchorInfo: function () { } }
     this.subject = new Linker(this.panel, this.linkSrv)
   })
 
