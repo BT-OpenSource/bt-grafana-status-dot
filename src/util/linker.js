@@ -5,9 +5,14 @@ export class Linker {
   }
 
   call (dots) {
-    dots.forEach(dot => { dot.linkScope = { } })
+    dots.forEach(this._createScope, this)
     dots.forEach(this._populateScope, this)
-    dots.forEach(this._link, this)
+    dots.forEach(this._evaluateLink, this)
+  }
+
+  _createScope (dot) {
+    var scope = Object.assign({}, this.panel.scopedVars)
+    dot.linkScope = scope
   }
 
   _populateScope (dot) {
@@ -17,14 +22,13 @@ export class Linker {
     })
   }
 
-  _link (dot) {
-    if (this.panel.links === undefined) return
-    var scope = this.panel.scopedVars
+  _evaluateLink (dot) {
+    var links = this.panel.links || []
+    var linkInfo = links[this.panel.linkIndex]
 
-    var linkInfo = this.panel.links[this.panel.linkIndex]
     if (linkInfo === undefined) return
 
-    dot.link = this.linkSrv.getPanelLinkAnchorInfo(
-      linkInfo, Object.assign({}, scope, dot.linkScope))
+    var linkFn = this.linkSrv.getPanelLinkAnchorInfo
+    dot.link = linkFn(linkInfo, dot.linkScope)
   }
 }

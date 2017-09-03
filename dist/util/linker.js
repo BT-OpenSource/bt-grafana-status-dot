@@ -43,11 +43,15 @@ System.register([], function (_export, _context) {
         _createClass(Linker, [{
           key: 'call',
           value: function call(dots) {
-            dots.forEach(function (dot) {
-              dot.linkScope = {};
-            });
+            dots.forEach(this._createScope, this);
             dots.forEach(this._populateScope, this);
-            dots.forEach(this._link, this);
+            dots.forEach(this._evaluateLink, this);
+          }
+        }, {
+          key: '_createScope',
+          value: function _createScope(dot) {
+            var scope = Object.assign({}, this.panel.scopedVars);
+            dot.linkScope = scope;
           }
         }, {
           key: '_populateScope',
@@ -58,15 +62,15 @@ System.register([], function (_export, _context) {
             });
           }
         }, {
-          key: '_link',
-          value: function _link(dot) {
-            if (this.panel.links === undefined) return;
-            var scope = this.panel.scopedVars;
+          key: '_evaluateLink',
+          value: function _evaluateLink(dot) {
+            var links = this.panel.links || [];
+            var linkInfo = links[this.panel.linkIndex];
 
-            var linkInfo = this.panel.links[this.panel.linkIndex];
             if (linkInfo === undefined) return;
 
-            dot.link = this.linkSrv.getPanelLinkAnchorInfo(linkInfo, Object.assign({}, scope, dot.linkScope));
+            var linkFn = this.linkSrv.getPanelLinkAnchorInfo;
+            dot.link = linkFn(linkInfo, dot.linkScope);
           }
         }]);
 
