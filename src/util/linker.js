@@ -18,7 +18,7 @@ export class Linker {
   }
 
   _link (dot) {
-		if (this.panel.links === undefined) return
+    if (this.panel.links === undefined) return
     var scope = this.panel.scopedVars
 
     var linkInfo = this.panel.links[this.panel.linkIndex]
