@@ -1,0 +1,59 @@
+<div class="editor-row">
+	<div class="section gf-form-group">
+		<h5 class="section-heading">
+			<span>Preview</span>
+		</h5>
+
+		<div class="gf-form">
+			{{ ctrl.dots[0].link.href }}
+		</div>
+	</div>
+</div>
+
+<div class="editor-row">
+	<div class="section gf-form-group">
+		<h5 class="section-heading">Drilldown</h5>
+
+		<div class="gf-form">
+			<label class="gf-form-label width-10">Link</label>
+
+			<div class="gf-form-select-wrapper width-15">
+				<select class="gf-form-input" ng-model="ctrl.panel.linkIndex" ng-change="ctrl.render()">
+					<option ng-repeat="link in ctrl.panel.links" ng-value="$index">{{ link.title }}</option>
+				</select>
+			</div>
+		</div>
+
+		<div class="gf-form">
+			<label class="gf-form-label width-10">Url Params</label>
+			<input class="gf-form-input width-15" ng-model="ctrl.panel.links[ctrl.panel.linkIndex].params" ng-change="ctrl.render()" placeholder="myvar=$myvar"/>
+		</div>
+	</div>
+
+	<div class="section gf-form-group">
+		<h5 class="section-heading">Variables</h5>
+
+		<div class="gf-form" ng-if="variable.index !== undefined" ng-repeat="variable in ctrl.panel.linkVars">
+			<div class="gf-form">
+				<label class="gf-form-label">Name</label>
+				<input type="text" class="input-small gf-form-input width-10" ng-model="variable.name" ng-change="ctrl.render()"/>
+				<label class="gf-form-label">Index</label>
+				<input type="text" class="input-small gf-form-input width-10" ng-model="variable.index" ng-change="ctrl.render()"/>
+
+				<label class="gf-form-label">
+					<a class="pointer" ng-click="ctrl.onEditorRemoveLinkVar($index)">
+						<i class="fa fa-trash"/>
+					</a>
+				</label>
+			</div>
+		</div>
+
+		<div class="gf-form">
+			<label class="gf-form-label">
+				<a class="pointer" ng-click="ctrl.onEditorAddLinkVar()">
+					Add Variable
+				</a>
+			</label>
+		</div>
+	</div>
+</div>

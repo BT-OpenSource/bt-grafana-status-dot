@@ -8,11 +8,19 @@ This panel shows a colored dot for each series. This is is useful if you want to
 
 ## Customization
 
-A separate tab allows you to customize how the display and color value are calculated for each dot, using [mathjs](http://mathjs.org).
+A separate tab allows you to customize how the display and color values are calculated for each dot, using [mathjs](http://mathjs.org).
 
 ![Status Dot Values](https://raw.githubusercontent.com/BTplc/grafana-status-dot/master/src/img/status_dot_values.png)
 
 The initial scope includes a `data` array, which is set to the compacted (no nulls) values of the series for each dot.
+
+## Links
+
+A further tab allows you to specify the link for each dot using variables derived from the name of its series.
+
+![Status Dot Links](https://raw.githubusercontent.com/BTplc/grafana-status-dot/master/src/img/status_dot_links.png)
+
+The variables are set by splitting the series name on each dot and selecting the value at the specified index.
 
 ## Compatibility
 

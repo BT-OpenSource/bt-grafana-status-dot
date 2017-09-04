@@ -1,9 +1,9 @@
 'use strict';
 
-System.register(['./module.css!', 'lodash', 'app/core/utils/kbn', 'app/plugins/sdk', './util/builder', './util/presenter'], function (_export, _context) {
+System.register(['./module.css!', 'lodash', 'app/core/utils/kbn', 'app/plugins/sdk', './util/builder', './util/presenter', './util/linker'], function (_export, _context) {
   "use strict";
 
-  var _, kbn, MetricsPanelCtrl, Builder, Presenter, _createClass, panelDefaults, StatusDotCtrl;
+  var _, kbn, MetricsPanelCtrl, Builder, Presenter, Linker, _createClass, panelDefaults, StatusDotCtrl;
 
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
@@ -46,6 +46,8 @@ System.register(['./module.css!', 'lodash', 'app/core/utils/kbn', 'app/plugins/s
       Builder = _utilBuilder.Builder;
     }, function (_utilPresenter) {
       Presenter = _utilPresenter.Presenter;
+    }, function (_utilLinker) {
+      Linker = _utilLinker.Linker;
     }],
     execute: function () {
       _createClass = function () {
@@ -70,6 +72,8 @@ System.register(['./module.css!', 'lodash', 'app/core/utils/kbn', 'app/plugins/s
         radius: '20px',
         defaultColor: 'rgb(117, 117, 117)',
         thresholds: [],
+        linkIndex: 0,
+        linkVars: [],
         format: 'none',
         decimals: 2,
         mathScratchPad: 'data = size(data)[1] == 0 ? [NaN] : data',
@@ -80,7 +84,7 @@ System.register(['./module.css!', 'lodash', 'app/core/utils/kbn', 'app/plugins/s
       _export('PanelCtrl', _export('StatusDotCtrl', StatusDotCtrl = function (_MetricsPanelCtrl) {
         _inherits(StatusDotCtrl, _MetricsPanelCtrl);
 
-        function StatusDotCtrl($scope, $injector) {
+        function StatusDotCtrl($scope, $injector, linkSrv) {
           _classCallCheck(this, StatusDotCtrl);
 
           var _this = _possibleConstructorReturn(this, (StatusDotCtrl.__proto__ || Object.getPrototypeOf(StatusDotCtrl)).call(this, $scope, $injector));
@@ -93,6 +97,7 @@ System.register(['./module.css!', 'lodash', 'app/core/utils/kbn', 'app/plugins/s
 
           _this.builder = new Builder(_this.panel);
           _this.presenter = new Presenter(_this.panel);
+          _this.linker = new Linker(_this.panel, linkSrv);
           return _this;
         }
 
@@ -101,6 +106,7 @@ System.register(['./module.css!', 'lodash', 'app/core/utils/kbn', 'app/plugins/s
           value: function onInitEditMode() {
             this.addEditorTab('Options', 'public/plugins/btplc-status-dot-panel/editor.html');
             this.addEditorTab('Values', 'public/plugins/btplc-status-dot-panel/values.html');
+            this.addEditorTab('Links', 'public/plugins/btplc-status-dot-panel/links.html');
             this.unitFormats = kbn.getUnitFormats();
           }
         }, {
@@ -114,6 +120,7 @@ System.register(['./module.css!', 'lodash', 'app/core/utils/kbn', 'app/plugins/s
           value: function onRender() {
             this.dots = this.builder.call(this.seriesList);
             this.presenter.call(this.dots);
+            this.linker.call(this.dots);
           }
         }, {
           key: 'onEditorSetFormat',
@@ -131,6 +138,18 @@ System.register(['./module.css!', 'lodash', 'app/core/utils/kbn', 'app/plugins/s
           key: 'onEditorRemoveThreshold',
           value: function onEditorRemoveThreshold(index) {
             this.panel.thresholds.splice(index, 1);
+            this.render();
+          }
+        }, {
+          key: 'onEditorAddLinkVar',
+          value: function onEditorAddLinkVar() {
+            this.panel.linkVars.push({ name: 'myvar', index: '0' });
+            this.render();
+          }
+        }, {
+          key: 'onEditorRemoveLinkVar',
+          value: function onEditorRemoveLinkVar(index) {
+            this.panel.linkVars.splice(index, 1);
             this.render();
           }
         }, {

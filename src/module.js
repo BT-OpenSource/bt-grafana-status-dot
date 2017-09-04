@@ -4,11 +4,14 @@ import kbn from 'app/core/utils/kbn'
 import {MetricsPanelCtrl} from 'app/plugins/sdk'
 import {Builder} from './util/builder'
 import {Presenter} from './util/presenter'
+import {Linker} from './util/linker'
 
 const panelDefaults = {
   radius: '20px',
   defaultColor: 'rgb(117, 117, 117)',
   thresholds: [],
+  linkIndex: 0,
+  linkVars: [],
   format: 'none',
   decimals: 2,
   mathScratchPad: 'data = size(data)[1] == 0 ? [NaN] : data',
@@ -17,7 +20,7 @@ const panelDefaults = {
 }
 
 export class StatusDotCtrl extends MetricsPanelCtrl {
-  constructor ($scope, $injector) {
+  constructor ($scope, $injector, linkSrv) {
     super($scope, $injector)
     _.defaults(this.panel, panelDefaults)
 
@@ -27,11 +30,13 @@ export class StatusDotCtrl extends MetricsPanelCtrl {
 
     this.builder = new Builder(this.panel)
     this.presenter = new Presenter(this.panel)
+    this.linker = new Linker(this.panel, linkSrv)
   }
 
   onInitEditMode () {
     this.addEditorTab('Options', 'public/plugins/btplc-status-dot-panel/editor.html')
     this.addEditorTab('Values', 'public/plugins/btplc-status-dot-panel/values.html')
+    this.addEditorTab('Links', 'public/plugins/btplc-status-dot-panel/links.html')
     this.unitFormats = kbn.getUnitFormats()
   }
 
@@ -43,6 +48,7 @@ export class StatusDotCtrl extends MetricsPanelCtrl {
   onRender () {
     this.dots = this.builder.call(this.seriesList)
     this.presenter.call(this.dots)
+    this.linker.call(this.dots)
   }
 
   onEditorSetFormat (subitem) {
@@ -57,6 +63,16 @@ export class StatusDotCtrl extends MetricsPanelCtrl {
 
   onEditorRemoveThreshold (index) {
     this.panel.thresholds.splice(index, 1)
+    this.render()
+  }
+
+  onEditorAddLinkVar () {
+    this.panel.linkVars.push({ name: 'myvar', index: '0' })
+    this.render()
+  }
+
+  onEditorRemoveLinkVar (index) {
+    this.panel.linkVars.splice(index, 1)
     this.render()
   }
 
