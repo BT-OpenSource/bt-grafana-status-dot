@@ -4,19 +4,18 @@
 
 		<div class="gf-form">
 			<label class="gf-form-label width-10">Radius</label>
-			<input type="text" class="input-small gf-form-input width-10" ng-model="ctrl.panel.radius" ng-change="ctrl.render()" ng-model-onblur=true/>
+			<input type="text" class="input-small gf-form-input width-10" ng-model="ctrl.panel.radius" ng-change="ctrl.render()"/>
 		</div>
 
 		<div class="gf-form">
 			<label class="gf-form-label width-10">Decimals</label>
-				<input type="number" class="input-small gf-form-input width-10" ng-model="ctrl.panel.decimals" ng-change="ctrl.render()" >
+				<input type="number" class="input-small gf-form-input width-10" ng-model="ctrl.panel.decimals" ng-change="ctrl.render()">
 		</div>
 
 		<div class="gf-form">
 			<label class="gf-form-label width-10">Units</label>
-				<ul class="tight-form-list">
-				<div class="dropdown width-10" ng-model="ctrl.panel.format" dropdown-typeahead="ctrl.unitFormats" dropdown-typeahead-on-select="ctrl.onEditorSetFormat($subItem)">
-				</li>
+      <ul class="tight-form-list">
+        <div class="dropdown width-10" ng-model="ctrl.panel.format" dropdown-typeahead2="ctrl.unitFormats" dropdown-typeahead-on-select="ctrl.onEditorSetFormat($subItem)">
 			</ul>
 		</div>
 	</div>
@@ -27,15 +26,15 @@
 		<div class="gf-form">
 			<label class="gf-form-label width-10">Default Color</label>
 			<label class="gf-form-label">
-				<spectrum-picker ng-model="ctrl.panel.defaultColor" ng-change="ctrl.render()" ng-model-onblur="true"/>
+				<spectrum-picker ng-model="ctrl.panel.defaultColor" ng-change="ctrl.render()"/>
 			</label>
 		</div>
 
 		<div class="gf-form" ng-repeat="threshold in ctrl.panel.thresholds">
 			<label class="gf-form-label width-10">Threshold {{$index + 1}}</label>
-			<input type="text" class="input-small gf-form-input width-10" ng-model="threshold.value" ng-change="ctrl.render()" ng-model-onblur=true />
+			<input type="text" class="input-small gf-form-input width-10" ng-model="threshold.value" ng-change="ctrl.render()"/>
 			<label class="gf-form-label">
-				<spectrum-picker ng-model="threshold.color" ng-change="ctrl.render()" ng-model-onblur="true"/>
+				<spectrum-picker ng-model="threshold.color" ng-change="ctrl.render()"/>
 			</label>
 
 			<label class="gf-form-label">
