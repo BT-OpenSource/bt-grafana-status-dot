@@ -16,7 +16,7 @@ The initial scope includes a `data` array, which is set to the compacted (no nul
 
 ## Links
 
-A further tab allows you to specify the link for each dot using variables derived from the name of its series.
+A further tab allows you to specify the hyperlink for each dot using variables derived from the name of its series.
 
 ![Status Dot Links](https://raw.githubusercontent.com/BTplc/grafana-status-dot/master/src/img/status_dot_links.png)
 
