@@ -18,9 +18,7 @@
 			<label class="gf-form-label width-10">Link</label>
 
 			<div class="gf-form-select-wrapper width-15">
-				<select class="gf-form-input" ng-model="ctrl.panel.linkIndex" ng-change="ctrl.render()">
-					<option ng-repeat="link in ctrl.panel.links" ng-value="$index">{{ link.title }}</option>
-				</select>
+        <select class="gf-form-input" ng-model="ctrl.panel.linkIndex" ng-options="idx as link.title for (idx, link) in ctrl.panel.links" ng-change="ctrl.render()"/>
 			</div>
 		</div>
 
