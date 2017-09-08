@@ -10,7 +10,7 @@ const panelDefaults = {
   radius: '20px',
   defaultColor: 'rgb(117, 117, 117)',
   thresholds: [],
-  linkIndex: 0,
+  linkIndex: '0',
   linkVars: [],
   format: 'none',
   decimals: 2,

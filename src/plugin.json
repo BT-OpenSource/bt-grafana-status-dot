@@ -4,7 +4,7 @@
   "id": "btplc-status-dot-panel",
 
   "info": {
-    "version": "0.1.0",
+    "version": "0.1.1",
     "description": "Dot panel showing status across series",
     "author": {
       "name": "BT Plc",
@@ -12,8 +12,8 @@
     },
     "keywords": ["status", "dot", "panel"],
     "links": [
-      {"name": "MIT Licence", "url": "https://github.com/BTplc/grafana-status-dot/blob/master/LICENSE"},
-      {"name": "Project Site", "url": "https://github.com/BTplc/grafana-status-dot"}
+      {"name": "MIT Licence", "url": "https://github.com/BT-OpenSource/bt-grafana-status-dot/blob/master/LICENSE"},
+      {"name": "Project Site", "url": "https://github.com/BT-OpenSource/bt-grafana-status-dot"}
     ],
     "screenshots": [
       {"name": "Status Dot", "path": "img/status_dot.png"},
