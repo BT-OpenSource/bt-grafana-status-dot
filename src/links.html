@@ -31,7 +31,7 @@
 	<div class="section gf-form-group">
 		<h5 class="section-heading">Variables</h5>
 
-		<div class="gf-form" ng-if="variable.index !== undefined" ng-repeat="variable in ctrl.panel.linkVars">
+		<div class="gf-form" ng-repeat="variable in ctrl.panel.linkVars">
 			<div class="gf-form">
 				<label class="gf-form-label">Name</label>
 				<input type="text" class="input-small gf-form-input width-10" ng-model="variable.name" ng-change="ctrl.render()"/>
