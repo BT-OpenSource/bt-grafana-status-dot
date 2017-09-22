@@ -1,11 +1,14 @@
 module.exports = {
-    "extends": "standard",
+    "extends": [
+      "standard"
+    ],
     "plugins": [
-        "standard",
-        "promise",
-        "jasmine"
+        "standard"
     ],
     "env": {
       "jasmine": true
-    }
+    },
+    "globals": {
+      "L": false
+    },
 };

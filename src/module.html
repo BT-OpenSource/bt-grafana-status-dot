@@ -1,10 +1,10 @@
-<div>
-  <div class="dot" ng-repeat="dot in ctrl.dots" ng-mouseenter="dot.hover=true" ng-mouseleave="dot.hover=false">
-		<a ng-href="{{dot.link.href}}" target="{{dot.link.target}}">
-			<div class="dot-circle" ng-style="ctrl.styleFor(dot)"/>
-		</a>
+<div style="display: inline-block" ng-repeat="dot in ctrl.dots">
+  <div ng-mouseenter="dot.hover = true" ng-mouseleave="dot.hover = false">
+    <a ng-href="{{dot.link.href}}" target="{{dot.link.target}}">
+      <div style="margin: 5px; border-radius: 100%" ng-style="ctrl.styleFor(dot)"/>
+    </a>
 
-    <div class="dot-tooltip" ng-show="dot.hover" style="white-space:nowrap">
+    <div ng-show="dot.hover" style="width: 0; white-space:nowrap; position: absolute">
       {{ dot.name }} <br> {{ ctrl.format(dot.displayValue) }}
     </div>
   </div>

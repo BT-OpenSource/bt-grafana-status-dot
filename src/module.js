@@ -1,4 +1,3 @@
-import './module.css!'
 import _ from 'lodash'
 import kbn from 'app/core/utils/kbn'
 import {MetricsPanelCtrl} from 'app/plugins/sdk'

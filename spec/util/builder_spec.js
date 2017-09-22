@@ -4,7 +4,8 @@ describe('Builder', function () {
   beforeEach(function () {
     this.subject = new Builder({
       mathScratchPad: 'foo = data[1]',
-      mathDisplayValue: 'foo', mathColorValue: 'foo + 1'
+      mathDisplayValue: 'foo',
+      mathColorValue: 'foo + 1'
     })
   })
 
