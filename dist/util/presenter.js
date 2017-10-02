@@ -16,10 +16,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var Presenter = exports.Presenter = function () {
-  function Presenter(options) {
+  function Presenter(panel, kbn) {
     _classCallCheck(this, Presenter);
 
-    this.options = options;
+    this.panel = panel;
+    this.kbn = kbn;
   }
 
   _createClass(Presenter, [{
@@ -28,19 +29,31 @@ var Presenter = exports.Presenter = function () {
       var _this = this;
 
       dots.forEach(function (dot) {
-        return dot.color = _this._colorFor(dot.colorValue);
+        return dot.color = _this._color(dot.colorValue);
+      });
+      dots.forEach(function (dot) {
+        return dot.tooltip = _this._tooltip(dot);
       });
     }
   }, {
-    key: '_colorFor',
-    value: function _colorFor(value) {
-      var thresholds = this.options.thresholds.concat().sort(function (a, b) {
-        return b.value - a.value;
+    key: '_tooltip',
+    value: function _tooltip(dot) {
+      return dot.name + '<br>' + this._format(dot.displayValue);
+    }
+  }, {
+    key: '_color',
+    value: function _color(value) {
+      var thresholds = _lodash2.default.sortBy(this.panel.thresholds, 'value');
+      var threshold = _lodash2.default.find(_lodash2.default.reverse(thresholds), function (t) {
+        return value >= t.value;
       });
-      var threshold = _lodash2.default.find(thresholds, function (threshold) {
-        return value >= threshold.value;
-      });
-      return threshold ? threshold.color : this.options.defaultColor;
+      return threshold ? threshold.color : this.panel.defaultColor;
+    }
+  }, {
+    key: '_format',
+    value: function _format(value) {
+      var formatFunc = this.kbn.valueFormats[this.panel.format];
+      return formatFunc(value, this.panel.decimals, null);
     }
   }]);
 

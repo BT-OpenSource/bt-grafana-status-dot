@@ -8,6 +8,7 @@ export class Linker {
     dots.forEach(this._createScope, this)
     dots.forEach(this._populateScope, this)
     dots.forEach(this._evaluateLink, this)
+    dots.forEach(this._cleanupLink, this)
   }
 
   _createScope (dot) {
@@ -30,5 +31,13 @@ export class Linker {
 
     var args = [linkInfo, dot.linkScope]
     dot.link = this.linkSrv.getPanelLinkAnchorInfo(...args)
+  }
+
+  _cleanupLink (dot) {
+    if (dot.link === undefined) return
+
+    if (dot.link.href.indexOf('http') === -1) {
+      dot.link.href = '/' + dot.link.href
+    }
   }
 }

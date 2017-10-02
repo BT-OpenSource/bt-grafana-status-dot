@@ -55,9 +55,17 @@ describe('Linker', function () {
       })
 
       it('assigns a scoped link to each dot', function () {
-        spyOn(this.linkSrv, 'getPanelLinkAnchorInfo').and.returnValue('link')
+        var link = { href: 'http' }
+        spyOn(this.linkSrv, 'getPanelLinkAnchorInfo').and.returnValue(link)
         this.subject.call([this.dot])
-        expect(this.dot.link).toEqual('link')
+        expect(this.dot.link).toEqual(link)
+      })
+
+      it('cleans up links with relative URLs', function () {
+        var link = { href: 'link' }
+        spyOn(this.linkSrv, 'getPanelLinkAnchorInfo').and.returnValue(link)
+        this.subject.call([this.dot])
+        expect(this.dot.link.href).toEqual('/link')
       })
     })
   })

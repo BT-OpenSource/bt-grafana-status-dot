@@ -4,6 +4,7 @@ import {MetricsPanelCtrl} from 'app/plugins/sdk'
 import {Builder} from './util/builder'
 import {Presenter} from './util/presenter'
 import {Linker} from './util/linker'
+import {Styler} from './util/styler'
 
 const panelDefaults = {
   radius: '20px',
@@ -28,8 +29,9 @@ export class StatusDotCtrl extends MetricsPanelCtrl {
     this.events.on('render', this.onRender.bind(this))
 
     this.builder = new Builder(this.panel)
-    this.presenter = new Presenter(this.panel)
+    this.presenter = new Presenter(this.panel, kbn)
     this.linker = new Linker(this.panel, linkSrv)
+    this.styler = new Styler(this.panel)
   }
 
   onInitEditMode () {
@@ -48,6 +50,7 @@ export class StatusDotCtrl extends MetricsPanelCtrl {
     this.dots = this.builder.call(this.seriesList)
     this.presenter.call(this.dots)
     this.linker.call(this.dots)
+    this.styler.call(this.dots)
   }
 
   onEditorSetFormat (subitem) {
@@ -56,7 +59,7 @@ export class StatusDotCtrl extends MetricsPanelCtrl {
   }
 
   onEditorAddThreshold () {
-    this.panel.thresholds.push({ value: 0, color: this.panel.defaultColor })
+    this.panel.thresholds.push({ color: this.panel.defaultColor })
     this.render()
   }
 
@@ -73,15 +76,6 @@ export class StatusDotCtrl extends MetricsPanelCtrl {
   onEditorRemoveLinkVar (index) {
     this.panel.linkVars.splice(index, 1)
     this.render()
-  }
-
-  styleFor (dot) {
-    return { 'background': dot.color, 'width': this.panel.radius, 'height': this.panel.radius }
-  }
-
-  format (value) {
-    var formatFunc = kbn.valueFormats[this.panel.format]
-    return formatFunc(value, this.panel.decimals, null)
   }
 }
 

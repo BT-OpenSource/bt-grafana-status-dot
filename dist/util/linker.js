@@ -22,6 +22,7 @@ var Linker = exports.Linker = function () {
       dots.forEach(this._createScope, this);
       dots.forEach(this._populateScope, this);
       dots.forEach(this._evaluateLink, this);
+      dots.forEach(this._cleanupLink, this);
     }
   }, {
     key: '_createScope',
@@ -49,6 +50,15 @@ var Linker = exports.Linker = function () {
 
       var args = [linkInfo, dot.linkScope];
       dot.link = (_linkSrv = this.linkSrv).getPanelLinkAnchorInfo.apply(_linkSrv, args);
+    }
+  }, {
+    key: '_cleanupLink',
+    value: function _cleanupLink(dot) {
+      if (dot.link === undefined) return;
+
+      if (dot.link.href.indexOf('http') === -1) {
+        dot.link.href = '/' + dot.link.href;
+      }
     }
   }]);
 

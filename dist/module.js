@@ -23,6 +23,8 @@ var _presenter = require('./util/presenter');
 
 var _linker = require('./util/linker');
 
+var _styler = require('./util/styler');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -59,8 +61,9 @@ var StatusDotCtrl = exports.StatusDotCtrl = function (_MetricsPanelCtrl) {
     _this.events.on('render', _this.onRender.bind(_this));
 
     _this.builder = new _builder.Builder(_this.panel);
-    _this.presenter = new _presenter.Presenter(_this.panel);
+    _this.presenter = new _presenter.Presenter(_this.panel, _kbn2.default);
     _this.linker = new _linker.Linker(_this.panel, linkSrv);
+    _this.styler = new _styler.Styler(_this.panel);
     return _this;
   }
 
@@ -84,6 +87,7 @@ var StatusDotCtrl = exports.StatusDotCtrl = function (_MetricsPanelCtrl) {
       this.dots = this.builder.call(this.seriesList);
       this.presenter.call(this.dots);
       this.linker.call(this.dots);
+      this.styler.call(this.dots);
     }
   }, {
     key: 'onEditorSetFormat',
@@ -94,7 +98,7 @@ var StatusDotCtrl = exports.StatusDotCtrl = function (_MetricsPanelCtrl) {
   }, {
     key: 'onEditorAddThreshold',
     value: function onEditorAddThreshold() {
-      this.panel.thresholds.push({ value: 0, color: this.panel.defaultColor });
+      this.panel.thresholds.push({ color: this.panel.defaultColor });
       this.render();
     }
   }, {
@@ -114,17 +118,6 @@ var StatusDotCtrl = exports.StatusDotCtrl = function (_MetricsPanelCtrl) {
     value: function onEditorRemoveLinkVar(index) {
       this.panel.linkVars.splice(index, 1);
       this.render();
-    }
-  }, {
-    key: 'styleFor',
-    value: function styleFor(dot) {
-      return { 'background': dot.color, 'width': this.panel.radius, 'height': this.panel.radius };
-    }
-  }, {
-    key: 'format',
-    value: function format(value) {
-      var formatFunc = _kbn2.default.valueFormats[this.panel.format];
-      return formatFunc(value, this.panel.decimals, null);
     }
   }]);
 

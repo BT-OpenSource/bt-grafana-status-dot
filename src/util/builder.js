@@ -1,8 +1,8 @@
 import * as math from '../external/math.min'
 
 export class Builder {
-  constructor (options) {
-    this.options = options
+  constructor (panel) {
+    this.panel = panel
   }
 
   call (seriesList = []) {
@@ -10,9 +10,9 @@ export class Builder {
   }
 
   _eval (series) {
-    var scratchPadExp = this.options.mathScratchPad
-    var displayValueExp = this.options.mathDisplayValue
-    var colorValueExp = this.options.mathColorValue
+    var scratchPadExp = this.panel.mathScratchPad
+    var displayValueExp = this.panel.mathDisplayValue
+    var colorValueExp = this.panel.mathColorValue
     var scope = { data: this._toValues(series) }
 
     return { name: series.target,
