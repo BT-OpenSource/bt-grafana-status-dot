@@ -43,9 +43,13 @@ var Presenter = exports.Presenter = function () {
   }, {
     key: '_color',
     value: function _color(value) {
-      var thresholds = _lodash2.default.sortBy(this.panel.thresholds, 'value');
-      var threshold = _lodash2.default.find(_lodash2.default.reverse(thresholds), function (t) {
-        return value >= t.value;
+      var _this2 = this;
+
+      var ts = _lodash2.default.sortBy(this.panel.thresholds, function (t) {
+        return _this2._value(t);
+      });
+      var threshold = _lodash2.default.find(_lodash2.default.reverse(ts), function (t) {
+        return value >= _this2._value(t);
       });
       return threshold ? threshold.color : this.panel.defaultColor;
     }
@@ -54,6 +58,11 @@ var Presenter = exports.Presenter = function () {
     value: function _format(value) {
       var formatFunc = this.kbn.valueFormats[this.panel.format];
       return formatFunc(value, this.panel.decimals, null);
+    }
+  }, {
+    key: '_value',
+    value: function _value(threshold) {
+      return parseFloat(threshold.value);
     }
   }]);
 

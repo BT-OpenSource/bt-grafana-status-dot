@@ -8,7 +8,7 @@ describe('Presenter', function () {
       defaultColor: 'default', thresholds: [], format: 'custom'
     }
 
-    this.dot = { colorValue: 100, displayValue: 'v', name: 'n' }
+    this.dot = { colorValue: 99.5, displayValue: 'v', name: 'n' }
     var kbn = { valueFormats: { custom: this.format } }
     this.subject = new Presenter(this.panel, kbn)
   })
@@ -28,7 +28,7 @@ describe('Presenter', function () {
 
     describe('when the thresholds are too high', function () {
       it('assigns the default color', function () {
-        this.panel.thresholds.push({ value: 101, color: 'color' })
+        this.panel.thresholds.push({ value: '99.6', color: 'color' })
         this.subject.call([this.dot])
         expect(this.dot.color).toEqual('default')
       })
@@ -36,7 +36,7 @@ describe('Presenter', function () {
 
     describe('when a threshold value is reached', function () {
       it('assigns the threshold color', function () {
-        this.panel.thresholds.push({ value: 100, color: 'color' })
+        this.panel.thresholds.push({ value: '99', color: 'color' })
         this.subject.call([this.dot])
         expect(this.dot.color).toEqual('color')
       })
@@ -44,10 +44,11 @@ describe('Presenter', function () {
 
     describe('when several thresholds are reached', function () {
       it('uses the closest threshold color', function () {
-        this.panel.thresholds.push({ value: 99, color: 'color1' })
-        this.panel.thresholds.push({ value: 89, color: 'color2' })
+        this.panel.thresholds.push({ value: '-99', color: 'color1' })
+        this.panel.thresholds.push({ value: '-79', color: 'color3' })
+        this.panel.thresholds.push({ value: '-89', color: 'color2' })
         this.subject.call([this.dot])
-        expect(this.dot.color).toEqual('color1')
+        expect(this.dot.color).toEqual('color3')
       })
     })
   })

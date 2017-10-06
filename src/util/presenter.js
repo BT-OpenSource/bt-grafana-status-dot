@@ -16,13 +16,17 @@ export class Presenter {
   }
 
   _color (value) {
-    var thresholds = _.sortBy(this.panel.thresholds, 'value')
-    var threshold = _.find(_.reverse(thresholds), (t) => value >= t.value)
+    var ts = _.sortBy(this.panel.thresholds, t => this._value(t))
+    var threshold = _.find(_.reverse(ts), t => value >= this._value(t))
     return threshold ? threshold.color : this.panel.defaultColor
   }
 
   _format (value) {
     var formatFunc = this.kbn.valueFormats[this.panel.format]
     return formatFunc(value, this.panel.decimals, null)
+  }
+
+  _value (threshold) {
+    return parseFloat(threshold.value)
   }
 }
