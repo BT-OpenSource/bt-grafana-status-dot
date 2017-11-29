@@ -19,7 +19,7 @@ const panelDefaults = {
   mathColorValue: 'data[end]'
 }
 
-export class StatusDotCtrl extends MetricsPanelCtrl {
+export class PanelCtrl extends MetricsPanelCtrl {
   constructor ($scope, $injector, linkSrv) {
     super($scope, $injector)
     _.defaults(this.panel, panelDefaults)
@@ -79,5 +79,4 @@ export class StatusDotCtrl extends MetricsPanelCtrl {
   }
 }
 
-StatusDotCtrl.templateUrl = 'module.html'
-export { StatusDotCtrl as PanelCtrl }
+PanelCtrl.templateUrl = 'module.html'

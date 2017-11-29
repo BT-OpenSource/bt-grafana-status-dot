@@ -1,47 +1,55 @@
 module.exports = function(grunt) {
-  require('load-grunt-tasks')(grunt);
+  grunt.loadNpmTasks('grunt-babel')
+  grunt.loadNpmTasks('grunt-contrib-copy')
+  grunt.loadNpmTasks('grunt-contrib-clean')
+  grunt.loadNpmTasks('grunt-contrib-watch')
+  grunt.loadNpmTasks('grunt-exec')
+  grunt.loadNpmTasks('grunt-eslint')
 
   grunt.initConfig({
-    clean: ["dist"],
+    clean: ['dist'],
 
     copy: {
       src: {
         cwd: 'src',
         expand: true,
-        src: ['**/*', '!**/*.scss'],
+        src: ['**/*'],
         dest: 'dist'
       },
       meta: {
         expand: true,
         src: ['README.md'],
-        dest: 'dist/README.md'
+        dest: 'dist'
       }
     },
 
     watch: {
-      rebuild_all: {
+      src: {
         files: ['src/**/*'],
         tasks: ['build']
-      },
+      }
     },
 
     babel: {
-      options: {
-        presets:  ["env"]
-      },
-      dist: {
+      src: {
         files: [{
           cwd: 'src',
           expand: true,
-          src: ['*.js', 'util/*.js'],
-          dest: 'dist',
-          ext:'.js'
+          src: ['**/*.js'],
+          dest: 'dist'
         }]
-      },
-    }, 
+      }
+    },
 
     eslint: {
-      target: ['src/*.js', 'src/util/*.js', 'spec']
+      src: {
+        files: [{
+          src: ['src/*.js', 'src/util/*.js']
+        },
+        {
+          cwd: 'spec'
+        }]
+      }
     },
 
     exec: {
@@ -49,9 +57,9 @@ module.exports = function(grunt) {
         cmd: 'node_modules/jasmine/bin/jasmine.js'
       }
     }
-  });
+  })
 
   grunt.registerTask('test', 'exec:jasmine')
-  grunt.registerTask('build', ['clean', 'copy:src', 'copy:meta', 'babel'])
+  grunt.registerTask('build', ['clean', 'copy', 'babel'])
   grunt.registerTask('default', ['eslint', 'test', 'build'])
-};
+}

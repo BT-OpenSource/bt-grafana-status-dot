@@ -1,54 +1,59 @@
 import {Presenter} from '../../src/util/presenter'
 
-describe('Presenter', function () {
-  beforeEach(function () {
-    this.format = jasmine.createSpy().and.returnValue('custom')
+describe('Presenter', () => {
+  let subject
+  let panel
+  let format
+  let dot
 
-    this.panel = {
+  beforeEach(() => {
+    format = jasmine.createSpy().and.returnValue('custom')
+
+    panel = {
       defaultColor: 'default', thresholds: [], format: 'custom'
     }
 
-    this.dot = { colorValue: 99.5, displayValue: 'v', name: 'n' }
-    var kbn = { valueFormats: { custom: this.format } }
-    this.subject = new Presenter(this.panel, kbn)
+    dot = { colorValue: 99.5, displayValue: 'v', name: 'n' }
+    let kbn = { valueFormats: { custom: format } }
+    subject = new Presenter(panel, kbn)
   })
 
-  describe('call', function () {
-    it('sets the tooltip for each dot', function () {
-      this.subject.call([this.dot])
-      expect(this.dot.tooltip).toEqual('n<br>custom')
+  describe('call', () => {
+    it('sets the tooltip for each dot', () => {
+      subject.call([dot])
+      expect(dot.tooltip).toEqual('n<br>custom')
     })
 
-    describe('when there are no thresholds', function () {
-      it('assigns the default color', function () {
-        this.subject.call([this.dot])
-        expect(this.dot.color).toEqual('default')
+    describe('when there are no thresholds', () => {
+      it('assigns the default color', () => {
+        subject.call([dot])
+        expect(dot.color).toEqual('default')
       })
     })
 
-    describe('when the thresholds are too high', function () {
-      it('assigns the default color', function () {
-        this.panel.thresholds.push({ value: '99.6', color: 'color' })
-        this.subject.call([this.dot])
-        expect(this.dot.color).toEqual('default')
+    describe('when the thresholds are too high', () => {
+      it('assigns the default color', () => {
+        panel.thresholds.push({ value: '99.6', color: 'color' })
+        subject.call([dot])
+        expect(dot.color).toEqual('default')
       })
     })
 
-    describe('when a threshold value is reached', function () {
-      it('assigns the threshold color', function () {
-        this.panel.thresholds.push({ value: '99', color: 'color' })
-        this.subject.call([this.dot])
-        expect(this.dot.color).toEqual('color')
+    describe('when a threshold value is reached', () => {
+      it('assigns the threshold color', () => {
+        panel.thresholds.push({ value: '99', color: 'color' })
+        subject.call([dot])
+        expect(dot.color).toEqual('color')
       })
     })
 
-    describe('when several thresholds are reached', function () {
-      it('uses the closest threshold color', function () {
-        this.panel.thresholds.push({ value: '-99', color: 'color1' })
-        this.panel.thresholds.push({ value: '-79', color: 'color3' })
-        this.panel.thresholds.push({ value: '-89', color: 'color2' })
-        this.subject.call([this.dot])
-        expect(this.dot.color).toEqual('color3')
+    describe('when several thresholds are reached', () => {
+      it('uses the closest threshold color', () => {
+        panel.thresholds.push({ value: '-99', color: 'color1' })
+        panel.thresholds.push({ value: '-79', color: 'color3' })
+        panel.thresholds.push({ value: '-89', color: 'color2' })
+        subject.call([dot])
+        expect(dot.color).toEqual('color3')
       })
     })
   })

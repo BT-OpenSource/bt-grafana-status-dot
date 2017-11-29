@@ -1,17 +1,20 @@
 import {Styler} from '../../src/util/styler'
 
-describe('Styler', function () {
-  beforeEach(function () {
-    this.subject = new Styler({ radius: 1 })
-    this.dot = { color: 'blue' }
+describe('Styler', () => {
+  let subject
+  let dot
+
+  beforeEach(() => {
+    subject = new Styler({ radius: 1 })
+    dot = { color: 'blue' }
   })
 
-  describe('call', function () {
-    it('assigns the style for each dot', function () {
-      this.subject.call([this.dot])
-      expect(this.dot.style['background']).toEqual('blue')
-      expect(this.dot.style['width']).toEqual(1)
-      expect(this.dot.style['height']).toEqual(1)
+  describe('call', () => {
+    it('assigns the style for each dot', () => {
+      subject.call([dot])
+      expect(dot.style['background']).toEqual('blue')
+      expect(dot.style['width']).toEqual(1)
+      expect(dot.style['height']).toEqual(1)
     })
   })
 })

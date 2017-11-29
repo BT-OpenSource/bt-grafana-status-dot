@@ -1,71 +1,76 @@
 import {Linker} from '../../src/util/linker'
 
-describe('Linker', function () {
-  beforeEach(function () {
-    this.panel = {
+describe('Linker', () => {
+  let subject
+  let panel
+  let dot
+  let linkSrv
+
+  beforeEach(() => {
+    panel = {
       linkVars: [{ name: 'var1', index: '1' }],
       scopedVars: { 'var0': { value: 'val0' } }
     }
 
-    this.dot = { name: 'val0.val1.val2' }
-    this.linkSrv = { getPanelLinkAnchorInfo: function () { } }
-    this.subject = new Linker(this.panel, this.linkSrv)
+    dot = { name: 'val0.val1.val2' }
+    linkSrv = { getPanelLinkAnchorInfo: () => { } }
+    subject = new Linker(panel, linkSrv)
   })
 
-  describe('call', function () {
-    it('assigns a link scope to each dot', function () {
-      var expected = {
+  describe('call', () => {
+    it('assigns a link scope to each dot', () => {
+      let expected = {
         var0: { value: 'val0' }, var1: { value: 'val1' }
       }
 
-      this.subject.call([this.dot])
-      expect(this.dot.linkScope).toEqual(expected)
+      subject.call([dot])
+      expect(dot.linkScope).toEqual(expected)
     })
 
-    describe('when the panel has no links', function () {
-      it('skips assigning the scoped link', function () {
-        this.subject.call([this.dot])
-        expect(this.dot.link).toEqual(undefined)
-      })
-    })
-
-    describe('when the panel link is invalid', function () {
-      beforeEach(function () {
-        this.panel.links = []
-        this.panel.linkIndex = 0
-      })
-
-      it('skips assigning the scoped link', function () {
-        this.subject.call([this.dot])
-        expect(this.dot.link).toEqual(undefined)
+    describe('when the panel has no links', () => {
+      it('skips assigning the scoped link', () => {
+        subject.call([dot])
+        expect(dot.link).toEqual(undefined)
       })
     })
 
-    describe('when the panel has a link', function () {
-      beforeEach(function () {
-        this.panel.links = ['linkInfo']
-        this.panel.linkIndex = 0
+    describe('when the panel link is invalid', () => {
+      beforeEach(() => {
+        panel.links = []
+        panel.linkIndex = 0
       })
 
-      it('calls the linkSrv with the dot scope', function () {
-        spyOn(this.linkSrv, 'getPanelLinkAnchorInfo')
-        this.subject.call([this.dot])
-        var linkFn = this.linkSrv.getPanelLinkAnchorInfo
-        expect(linkFn).toHaveBeenCalledWith('linkInfo', this.dot.linkScope)
+      it('skips assigning the scoped link', () => {
+        subject.call([dot])
+        expect(dot.link).toEqual(undefined)
+      })
+    })
+
+    describe('when the panel has a link', () => {
+      beforeEach(() => {
+        panel.links = ['linkInfo']
+        panel.linkIndex = 0
       })
 
-      it('assigns a scoped link to each dot', function () {
-        var link = { href: 'http' }
-        spyOn(this.linkSrv, 'getPanelLinkAnchorInfo').and.returnValue(link)
-        this.subject.call([this.dot])
-        expect(this.dot.link).toEqual(link)
+      it('calls the linkSrv with the dot scope', () => {
+        spyOn(linkSrv, 'getPanelLinkAnchorInfo')
+        subject.call([dot])
+        let linkFn = linkSrv.getPanelLinkAnchorInfo
+        expect(linkFn).toHaveBeenCalledWith('linkInfo', dot.linkScope)
       })
 
-      it('cleans up links with relative URLs', function () {
-        var link = { href: 'link' }
-        spyOn(this.linkSrv, 'getPanelLinkAnchorInfo').and.returnValue(link)
-        this.subject.call([this.dot])
-        expect(this.dot.link.href).toEqual('/link')
+      it('assigns a scoped link to each dot', () => {
+        let link = { href: 'http' }
+        spyOn(linkSrv, 'getPanelLinkAnchorInfo').and.returnValue(link)
+        subject.call([dot])
+        expect(dot.link).toEqual(link)
+      })
+
+      it('cleans up links with relative URLs', () => {
+        let link = { href: 'link' }
+        spyOn(linkSrv, 'getPanelLinkAnchorInfo').and.returnValue(link)
+        subject.call([dot])
+        expect(dot.link.href).toEqual('/link')
       })
     })
   })
