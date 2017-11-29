@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.PanelCtrl = exports.StatusDotCtrl = undefined;
+exports.PanelCtrl = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -46,13 +46,13 @@ var panelDefaults = {
   mathColorValue: 'data[end]'
 };
 
-var StatusDotCtrl = exports.StatusDotCtrl = function (_MetricsPanelCtrl) {
-  _inherits(StatusDotCtrl, _MetricsPanelCtrl);
+var PanelCtrl = exports.PanelCtrl = function (_MetricsPanelCtrl) {
+  _inherits(PanelCtrl, _MetricsPanelCtrl);
 
-  function StatusDotCtrl($scope, $injector, linkSrv) {
-    _classCallCheck(this, StatusDotCtrl);
+  function PanelCtrl($scope, $injector, linkSrv) {
+    _classCallCheck(this, PanelCtrl);
 
-    var _this = _possibleConstructorReturn(this, (StatusDotCtrl.__proto__ || Object.getPrototypeOf(StatusDotCtrl)).call(this, $scope, $injector));
+    var _this = _possibleConstructorReturn(this, (PanelCtrl.__proto__ || Object.getPrototypeOf(PanelCtrl)).call(this, $scope, $injector));
 
     _lodash2.default.defaults(_this.panel, panelDefaults);
 
@@ -67,7 +67,7 @@ var StatusDotCtrl = exports.StatusDotCtrl = function (_MetricsPanelCtrl) {
     return _this;
   }
 
-  _createClass(StatusDotCtrl, [{
+  _createClass(PanelCtrl, [{
     key: 'onInitEditMode',
     value: function onInitEditMode() {
       this.addEditorTab('Options', 'public/plugins/btplc-status-dot-panel/editor.html');
@@ -121,8 +121,7 @@ var StatusDotCtrl = exports.StatusDotCtrl = function (_MetricsPanelCtrl) {
     }
   }]);
 
-  return StatusDotCtrl;
+  return PanelCtrl;
 }(_sdk.MetricsPanelCtrl);
 
-StatusDotCtrl.templateUrl = 'module.html';
-exports.PanelCtrl = StatusDotCtrl;
+PanelCtrl.templateUrl = 'module.html';
