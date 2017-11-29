@@ -1,10 +1,5 @@
 module.exports = function(grunt) {
-  grunt.loadNpmTasks('grunt-babel')
-  grunt.loadNpmTasks('grunt-contrib-copy')
-  grunt.loadNpmTasks('grunt-contrib-clean')
-  grunt.loadNpmTasks('grunt-contrib-watch')
-  grunt.loadNpmTasks('grunt-exec')
-  grunt.loadNpmTasks('grunt-eslint')
+  require('load-grunt-tasks')(grunt)
 
   grunt.initConfig({
     clean: ['dist'],
