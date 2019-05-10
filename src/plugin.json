@@ -4,7 +4,7 @@
   "id": "btplc-status-dot-panel",
 
   "info": {
-    "version": "0.2.3",
+    "version": "0.2.4",
     "description": "Dot panel showing status across series",
     "author": {
       "name": "BT Plc",
