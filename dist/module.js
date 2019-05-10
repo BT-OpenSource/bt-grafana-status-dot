@@ -71,7 +71,7 @@ var PanelCtrl = exports.PanelCtrl = function (_MetricsPanelCtrl) {
     key: 'onInitEditMode',
     value: function onInitEditMode() {
       this.addEditorTab('Options', 'public/plugins/btplc-status-dot-panel/editor.html');
-      this.addEditorTab('Values', 'public/plugins/btplc-status-dot-panel/values.html');
+      this.addEditorTab('Series values', 'public/plugins/btplc-status-dot-panel/values.html');
       this.addEditorTab('Links', 'public/plugins/btplc-status-dot-panel/links.html');
       this.unitFormats = _kbn2.default.getUnitFormats();
     }
